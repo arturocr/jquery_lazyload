@@ -26,7 +26,8 @@
             data_attribute  : "original",
             skip_invisible  : true,
             appear          : null,
-            load            : null
+            load            : null,
+            callback        : null
         };
                 
         if(options) {
@@ -96,6 +97,9 @@
                             if (settings.load) {
                                 var elements_left = elements.length;
                                 settings.load.call(self, elements_left, settings);
+                            }
+                            if (elements.length === 0 && settings.callback) {
+                                settings.callback.call();
                             }
                         })
                         .attr("src", $self.data(settings.data_attribute));
